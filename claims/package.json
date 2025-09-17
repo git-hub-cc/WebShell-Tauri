@@ -8,8 +8,10 @@
     "build": "vite build",
     "preview": "vite preview",
     "tauri": "tauri",
-    "dev-android": "npm run tauri dev",
-    "build-android": "npm run tauri build"
+    "dev-Desktop": "npm run tauri dev",
+    "build-Desktop": "npm run tauri build",
+    "dev-Android": "npm run tauri android dev",
+    "build-Android": "npm run tauri android build"
   },
   "dependencies": {
     "vue": "^3.5.13",

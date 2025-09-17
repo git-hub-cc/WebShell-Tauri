@@ -12,9 +12,8 @@
   "app": {
     "windows": [
       {
-        "title": "claims",
-        "width": 800,
-        "height": 600
+        "title": "webchat",
+        "url": "https://ppmc.club/webchat-vue"
       }
     ],
     "security": {
@@ -31,5 +30,5 @@
       "icons/icon.icns",
       "icons/icon.ico"
     ]
+    }
   }
-}
