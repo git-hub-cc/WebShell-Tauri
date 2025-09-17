@@ -59,5 +59,7 @@ CN=cc, OU=cc, O=cc, L=cc, ST=cc, C=cc
 Warning:
 JKS 密钥库使用专用格式。建议使用 "keytool -importkeystore -srckeystore C:\Users\User\upload-keystore.jks -destkeystore C:\Users\User\upload-keystore.jks -deststoretype pkcs12" 迁移到行业标准格式 PKCS12。
 
-
+生成图标
+cd claims
+npm run tauri icon .\src-tauri\icons\favicon.png
 
