@@ -11,7 +11,7 @@
     "dev-Desktop": "npm run tauri dev",
     "build-Desktop": "npm run tauri build",
     "dev-Android": "npm run tauri android dev",
-    "build-Android": "npm run tauri android build"
+    "build-Android": "npm run tauri android build -- --target aarch64"
   },
   "dependencies": {
     "vue": "^3.5.13",

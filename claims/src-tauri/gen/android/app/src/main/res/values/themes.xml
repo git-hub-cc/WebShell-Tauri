@@ -1,6 +1,24 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.claims" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Customize your theme here. -->
-    </style>
+  <!-- Base application theme. -->
+  <style name="Theme.claims" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Customize your theme here. -->
+  </style>
+
+  <!--
+  ================================================================
+  |           ✅ MODIFICATION START: Add Non-Immersive Theme          |
+  ================================================================
+  -->
+  <!-- This is the new, non-immersive theme that will be applied to the app. -->
+  <style name="Theme.claims.NoEdgeToEdge" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <!-- Define a solid color for the status bar in light mode. -->
+    <item name="android:statusBarColor">@android:color/white</item>
+    <!-- Ensure status bar icons are dark on a light background. -->
+    <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+  </style>
+  <!--
+  ================================================================
+  |           ✅ MODIFICATION END                                   |
+  ================================================================
+  -->
 </resources>
