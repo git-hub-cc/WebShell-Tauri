@@ -1,0 +1,30 @@
+# .cargo/config.toml
+
+# 1. 配置国内的 crates.io 镜像，加速依赖下载
+# 这对于国内用户至关重要，可以避免因网络问题导致的下载失败或速度过慢
+[source.crates-io]
+replace-with = 'tuna'
+
+[source.tuna]
+registry = "https://mirrors.tuna.tsinghua.edu.cn/git/crates.io-index.git"
+
+# 2. 配置更快的链接器 (Linker)，显著提升开发时的编译速度
+# 链接是编译的最后一步，默认的链接器比较慢
+# 以下针对 Windows 系统，因为你的日志显示你在用 PowerShell (PS C:\Users\...)
+
+[target.x86_64-pc-windows-msvc]
+linker = "rust-lld.exe"
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
+# --- 如果你需要在其他系统上开发，可以保留以下配置 ---
+
+# Linux 系统
+[target.x86_64-unknown-linux-gnu]
+rustflags = ["-C", "link-arg=-fuse-ld=lld"]
+
+# macOS 系统 (Intel & Apple Silicon)
+[target.x86_64-apple-darwin]
+rustflags = ["-C", "link-arg=-fuse-ld=zld"]
+
+[target.aarch64-apple-darwin]
+rustflags = ["-C", "link-arg=-fuse-ld=zld"]

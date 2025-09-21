@@ -1,8 +1,9 @@
 package club.ppmc.claims
 
 import android.os.Bundle
-// ✅ MODIFICATION START: Import necessary classes for handling Window Insets
+// ✅ MODIFICATION START: Import necessary classes for modern Window Insets handling
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 // ✅ MODIFICATION END
 
@@ -10,32 +11,42 @@ class MainActivity : TauriActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
 
-    // ✅ MODIFICATION START: Implement the definitive solution using an Insets listener.
-    // This approach is more robust than setting window flags, as it defines a permanent rule
-    // for how the main content view should react to system bars like the status bar.
+    // ✅ MODIFICATION START: Implement the robust WindowInsets listener solution.
 
-    // 1. Get the root content view of the activity. This is the view that holds our WebView.
+    // Stage 1: Enable Edge-to-Edge display.
+    // This tells the system that our app will handle drawing behind the system bars (status bar, navigation bar).
+    // It's a prerequisite for manually controlling layout based on insets.
+    WindowCompat.setDecorFitsSystemWindows(window, false)
+
+    // Get the root content view of the activity. This is the view that holds our WebView.
     val contentView = findViewById<android.view.View>(android.R.id.content)
 
-    // 2. Attach a listener that fires whenever the window insets (areas occupied by system bars) change.
+    // Stage 2 & 3: Attach a listener that fires whenever window insets change.
+    // This is triggered by system bars appearing/disappearing and, crucially, by the keyboard (IME) showing/hiding.
     ViewCompat.setOnApplyWindowInsetsListener(contentView) { view, windowInsets ->
+      // Get the insets (padding) caused by system bars (status bar, navigation bar).
+      val systemBars = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+      // Get the insets caused by the keyboard (Input Method Editor).
+      val ime = windowInsets.getInsets(WindowInsetsCompat.Type.ime())
 
-      // 3. Get the insets specifically for the system bars (status bar and navigation bar).
-      val insets = windowInsets.getInsets(WindowInsetsCompat.Type.systemBars())
+      // Calculate the final bottom padding. We need to leave space for whichever is taller:
+      // the navigation bar (from systemBars.bottom) or the keyboard (from ime.bottom).
+      val bottomPadding = Math.max(systemBars.bottom, ime.bottom)
 
-      // 4. Apply these insets as padding to our content view.
-      //    - view.setPadding(left, top, right, bottom)
-      //    This command forces our content (the WebView) to be laid out *inside* the space
-      //    defined by the system bars, effectively pushing it below the status bar.
-      view.setPadding(insets.left, insets.top, insets.right, insets.bottom)
+      // Apply the calculated insets as padding to our content view.
+      // This effectively pushes our WebView content into the safe, visible area,
+      // dynamically adjusting when the keyboard appears or disappears.
+      view.setPadding(
+        systemBars.left,
+        systemBars.top,
+        systemBars.right,
+        bottomPadding
+      )
 
-      // 5. Return the insets to allow the system to continue processing them for child views.
-      WindowInsetsCompat.CONSUMED
+      // Return the original insets. This is standard practice to allow the system
+      // to continue dispatching these insets to any child views if needed.
+      windowInsets
     }
     // ✅ MODIFICATION END
   }
-
-  // ❌ DEPRECATED: The onWindowFocusChanged override is no longer the primary strategy,
-  // as the Insets listener is more reliable. You can safely remove the previous override
-  // of this method if you had it.
 }
