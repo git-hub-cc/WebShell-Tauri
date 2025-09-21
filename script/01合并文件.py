@@ -7,11 +7,11 @@ START_DIRECTORY = '.'
 # 输出文件名
 OUTPUT_FILE = 'res.md'
 # 允许的文件扩展名 (请使用小写)
-ALLOWED_EXTENSIONS = ['.json', '.html', '.js', '.css', '.vue', '.rs', '.toml', '.']
+ALLOWED_EXTENSIONS = ['.json', '.html', '.js', '.css', '.vue', '.rs', '.toml', '.kt', '.xml']
 # 行数限制
 LINE_LIMIT = 1000
 # 要排除的目录名
-EXCLUDED_DIRS = ['dist', 'node_modules', 'target', 'gen']
+EXCLUDED_DIRS = ['dist', 'node_modules', 'target', 'build']
 # 【新增】要排除的特定文件名
 EXCLUDED_FILES = ['package-lock.json']
 # --- 配置结束 ---
