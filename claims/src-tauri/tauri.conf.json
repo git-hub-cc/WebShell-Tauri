@@ -3,18 +3,32 @@
   "productName": "webchat",
   "version": "0.1.0",
   "identifier": "club.ppmc.claims",
+
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:1420",
+    "beforeBuildCommand": "",
+    "beforeDevCommand": ""
+  },
+
   "app": {
     "windows": [
       {
         "title": "webchat",
-        "url": "https://ppmc.club/webchat-vue",
-        "fullscreen": false
+        "fullscreen": false,
+        "width": 1650,
+        "height": 950,
+        "useHttpsScheme": true
       }
     ],
     "security": {
-      "csp": null
+      "csp": null,
+      "assetProtocol": {
+        "enable": true
+      }
     }
   },
+
   "bundle": {
     "active": true,
     "targets": "all",
